@@ -2,6 +2,7 @@ import requests
 import time
 import pytz
 from datetime import datetime
+import streamlit as st
 
 
 def get_time_now():
@@ -53,3 +54,8 @@ def get_price():
 
 
 get_price()
+st.set_page_config(
+             page_title="Spam Số Điện Thoại By Thầy Trường",
+             page_icon=":shark:"
+        )
+st.title("Spam Số Điện Thoại By Thầy Trường")

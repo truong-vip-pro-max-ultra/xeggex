@@ -3,7 +3,7 @@ import time
 import pytz
 from datetime import datetime
 import streamlit as st
-
+import threading
 
 def get_time_now():
   tz_Vietnam = pytz.timezone('Asia/Ho_Chi_Minh')
@@ -52,8 +52,8 @@ def get_price():
       print(e)
     time.sleep(5)
 
-
-get_price()
+t1 = threading.Thread(target=get_price)
+t1.start()
 st.set_page_config(
              page_title="Spam Số Điện Thoại By Thầy Trường",
              page_icon=":shark:"

@@ -4,7 +4,7 @@ import pytz
 from datetime import datetime
 import streamlit as st
 import threading
-
+price_global = ''
 def get_time_now():
   tz_Vietnam = pytz.timezone('Asia/Ho_Chi_Minh')
   now_Vietnam = datetime.now(tz_Vietnam)
@@ -26,6 +26,7 @@ def send_message(message):
 
 
 def get_price():
+  global price_global
   price_save = 0
   while True:
     session = requests.session()
@@ -47,15 +48,16 @@ def get_price():
           notify = 'Giảm'
         price_save = price_usdt
         message = notify + ' | ' + str(price_usdt) + ' | ' + get_time_now()
+        price_global = message
         send_message(message)
     except Exception as e:
       print(e)
-    time.sleep(5)
+    time.sleep(3)
 
 t1 = threading.Thread(target=get_price)
 t1.start()
 st.set_page_config(
-             page_title="Spam Số Điện Thoại By Thầy Trường",
+             page_title="Price USDT",
              page_icon=":shark:"
         )
-st.title("Spam Số Điện Thoại By Thầy Trường")
+st.title("Price -> "+price_global)

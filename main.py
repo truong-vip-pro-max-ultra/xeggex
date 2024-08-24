@@ -29,15 +29,15 @@ def get_price():
   global price_global
   price_save = 0
   while True:
-    session = requests.session()
-    url = 'https://xeggex.com/market/ZEPH_USDT'
-    headers = {
-        'user-agent':
-        'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36'
-    }
-    p = session.get(url)
-    price = cut_string(p.text, 'class="marketlastprice">', '<')
     try:
+      session = requests.session()
+      url = 'https://xeggex.com/market/ZEPH_USDT'
+      headers = {
+          'user-agent':
+          'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36'
+      }
+      p = session.get(url)
+      price = cut_string(p.text, 'class="marketlastprice">', '<')
       float(price)
       price_usdt = float(price)
       if price_save != price_usdt:
